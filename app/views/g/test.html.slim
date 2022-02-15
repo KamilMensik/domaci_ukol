@@ -1,0 +1,7 @@
+h1 Markup Examples
+-if user_signed_in?
+	h2 Hello
+-else
+	=simple_form_for @user do |f|
+		=f.input :title
+		=f.button :submit
