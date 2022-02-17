@@ -48,7 +48,7 @@ gem 'simple_form', '~> 5.1'
 
 gem 'pagy', '~> 5.10', '>= 5.10.1'
 
-gem 'rspec', '~> 3.11'
+gem 'rspec-rails'
 
 gem 'bootstrap', '~> 5.1', '>= 5.1.3'
 

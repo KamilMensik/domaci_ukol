@@ -1,6 +1,6 @@
 class GController < ApplicationController
   def index
-    @user = Tag.new
+    @tags = Tag.all
   end
   def test
     @user = Tag.new

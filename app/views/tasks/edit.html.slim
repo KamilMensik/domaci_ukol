@@ -1,0 +1,6 @@
+=simple_form_for @tag do |f|
+	-@tag.errors.full_messages_for(:user_id).each do |message|
+		=message
+	=f.input :title
+	=f.input :user_id, as: :hidden, input_html: { value: current_user.id }
+	=f.button :submit

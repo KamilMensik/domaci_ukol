@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_15_103521) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_15_140103) do
   create_table "projects", force: :cascade do |t|
     t.string "title", null: false
     t.integer "position", null: false
@@ -42,7 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_15_103521) do
     t.text "description"
     t.boolean "is_done", null: false
     t.integer "user_id", null: false
-    t.integer "project_id", null: false
+    t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_tasks_on_project_id"
@@ -57,6 +57,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_15_103521) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name", null: false
+    t.string "surname", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,4 +1,13 @@
 class TagsController < ApplicationController
+    before_action :authenticate_user!
+    def index
+        @tags = Tag.all
+    end
+
+    def show
+        @tag = Tag.find(params[:id])
+    end
+
 	def new
     	@tag = Tag.new
   	end
@@ -6,15 +15,34 @@ class TagsController < ApplicationController
   	def create
         @tag = Tag.new(tag_params)
 
-        if @post.save
-            redirect_to g_user_path
+        if @tag.save
+            redirect_to tags_path
         else
             render :new, status: :unprocessable_entity
         end
     end
-    
+
+    def edit
+        @tag = Tag.find(params[:id])
+    end
+
+    def update
+    @tag = Tag.find(params[:id])
+    if @tag.update(tag_params)
+        redirect_to @tag
+        else
+        render :edit, status: :unprocessable_entity
+        end
+    end
+
+    def destroy
+        @tag = Tag.find(params[:id])
+        @tag.destroy
+        redirect_back(fallback_location: root_path)
+    end
+
     private
     def tag_params
-        params.require(:post).permit(:title,:user_id)
+        params.require(:tag).permit(:title,:user_id)
     end
 end
