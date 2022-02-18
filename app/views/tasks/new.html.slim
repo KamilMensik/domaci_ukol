@@ -1,11 +1,1 @@
-=simple_form_for @task do |f|
-	-@task.errors.full_messages_for(:user_id).each do |message|
-		=message
-	=f.input :user_id, as: :hidden, input_html: { value: current_user.id }
-
-	=f.input :title
-	=f.input :description
-	=f.input :is_done
-	=f.association :tags
-	=f.association :project
-	=f.button :submit
+=render "tasks/task_form"

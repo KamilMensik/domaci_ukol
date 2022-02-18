@@ -1,12 +1,11 @@
 class TasksController < ApplicationController
 		before_action :authenticate_user!
     def index
-        @pagy, @tasks = pagy(Task.all.includes(:tags),items:20)
+        @pagy, @tasks = pagy(task.all.includes(:tags,:project),items:20)
     end
 
     def show
-        @task = Task.includes(:task_tags, :tags).find(params[:id])
-        @task_tag = TaskTag.all
+        @task = task.includes(:project, :tags).find(params[:id])
     end
 
 	def new
@@ -24,11 +23,11 @@ class TasksController < ApplicationController
     end
 
     def edit
-        @task = Task.find(params[:id])
+        @task = task.find(params[:id])
     end
 
     def update
-    @task = Task.find(params[:id])
+    @task = task.find(params[:id])
     if @task.update(task_params)
         redirect_to @task
         else
@@ -37,13 +36,24 @@ class TasksController < ApplicationController
     end
 
     def destroy
-        @task = Task.find(params[:id])
+        @task = task.find(params[:id])
         @task.destroy
+        redirect_back(fallback_location: root_path)
+    end
+
+    def complete
+        @task = Task.find(params[:id])
+        @task.is_done = !@task.is_done
+        @task.save
         redirect_back(fallback_location: root_path)
     end
 
     private
     def task_params
-        params.require(:task).permit(:title,:user_id,:description,:is_done,:project_id,tag_ids: [])
+        params.require(:task).permit(:title,:user_id,:description,:is_done,:search,:project_id,tag_ids: [])
+    end
+
+    def task
+        Task.cur_user(current_user).set_scope(params)
     end
 end

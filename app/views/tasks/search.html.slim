@@ -1,0 +1,32 @@
+div style = "text-align:center" 
+	h1 = "All Tasks for user #{current_user.first_name}" 
+	br
+	=link_to "Create new task", new_task_path,class:"btn btn-primary"
+div class = "container"
+	==pagy_nav(@pagy)
+	br
+	table class="table table-dark table-striped table-bordered table-fixed"
+		thead
+			tr
+				th Title
+				th Description
+				th Tags
+				th Project
+				th Is Completed
+				th File
+				th
+				th 
+				th 
+
+		tbody
+			- @tasks.each do |task|
+				tr
+					td=task.title
+					td=task.description
+					td=task.show_tags
+					td=task.project.title unless task.project==nil
+					td=task.is_done
+					td
+					td=link_to "closer look", "tasks/#{task.id}"
+					td=link_to "edit", edit_task_path(task.id)
+					td=link_to "delete", "tasks/#{task.id}", data: {turbo_method: :delete,turbo_confirm: "Are you sure?"}

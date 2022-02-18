@@ -5,4 +5,14 @@ class Project < ApplicationRecord
 	
 	belongs_to :user
 	has_many :tasks, dependent: :destroy
+
+	scope :cur_user, -> (user) { where(user_id: user.id) }
+
+	def self.search(search)
+		if search
+			Project.where('title LIKE ?', "%#{search}%")
+		else
+			Project.all
+		end
+	end
 end

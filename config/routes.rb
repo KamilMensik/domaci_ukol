@@ -3,11 +3,10 @@ Rails.application.routes.draw do
   get 'g/index'
   get "g/test"
   root "g#index"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get "tasks/:id/complete", to: "tasks#complete", as: "complete"
 
-  # Defines the root path route ("/")
-  # root "articles#index"
   resources :tags
   resources :projects
   resources :tasks
+  get "g/search", as: "search"
 end

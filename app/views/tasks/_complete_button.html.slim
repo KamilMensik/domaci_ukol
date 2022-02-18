@@ -1,0 +1,4 @@
+-if task.is_done
+	=link_to "undo task", complete_path(task.id)
+-else
+	=link_to "mark as done", complete_path(task.id)
