@@ -4,9 +4,12 @@ div class = "container"
 			=message
 		=f.input :user_id, as: :hidden, input_html: { value: current_user.id }
 
-		=f.input :title
-		=f.input :description
-		=f.input :is_done
-		=f.association :tags, as: :check_boxes,item_wrapper_class: 'checkbox_container'
-		=f.association :project
-		=f.button :submit
+		=f.input :title,label: t(:title)
+		=f.input :description,label: t(:description)
+		=f.input :is_done,label: t(:is_done)
+		=f.input_field :file, class:"form-control",label: t(:file)
+		=f.association :tags, as: :check_boxes,item_wrapper_class: 'checkbox_container',label: t(:tags)
+		=f.association :project,label: t(:project)
+		br
+		div style="text-align:center"
+			=f.submit t(:complete), class:"btn btn-outline-primary"

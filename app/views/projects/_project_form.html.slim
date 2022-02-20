@@ -1,0 +1,12 @@
+div class="container"
+	=simple_form_for @project do |f|
+		-@project.errors.full_messages_for(:title).each do |message|
+			=message
+		=f.input :title, label: t(:title)
+		-@project.errors.full_messages_for(:position).each do |message|
+			=message
+		=f.input :position, label: t(:position)
+		=f.input :user_id, as: :hidden, input_html: { value: current_user.id }
+		br
+		div style="text-align:center"
+			=f.submit t(:complete), class:"btn btn-outline-primary"

@@ -11,7 +11,17 @@
   </head>
 
   <body>
+    <% if notice%>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <%= notice%>
+      </div>
+    <% elsif alert%>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <%= alert%>
+      </div>
+    <% end %>
     <%= render "layouts/header"%>
+    <br>
     <%= yield %>
   </body>
 </html>

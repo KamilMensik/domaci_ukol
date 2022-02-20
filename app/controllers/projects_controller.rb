@@ -1,11 +1,11 @@
 class ProjectsController < ApplicationController
 	before_action :authenticate_user!
     def index
-        @pagy, @projects = pagy(Project.all,items:2)
+        @pagy, @projects = pagy(cur_project.all.order(:position),items:15)
     end
 
     def show
-        @project = Project.find(params[:id])
+        @project = cur_project.find(params[:id])
     end
 
 	def new
@@ -23,11 +23,11 @@ class ProjectsController < ApplicationController
     end
 
     def edit
-        @project = Project.find(params[:id])
+        @project = cur_project.find(params[:id])
     end
 
     def update
-    @project = Project.find(params[:id])
+    @project = cur_project.find(params[:id])
     if @project.update(project_params)
         redirect_to @project
         else
@@ -36,7 +36,7 @@ class ProjectsController < ApplicationController
     end
 
     def destroy
-        @project = Project.find(params[:id])
+        @project = cur_project.find(params[:id])
         @project.destroy
         redirect_back(fallback_location: root_path)
     end
@@ -44,5 +44,9 @@ class ProjectsController < ApplicationController
     private
     def project_params
         params.require(:project).permit(:title,:user_id,:position)
+    end
+
+    def cur_project
+        Project.cur_user(current_user)
     end
 end

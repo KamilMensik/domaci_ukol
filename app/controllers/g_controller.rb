@@ -1,14 +1,8 @@
 class GController < ApplicationController
+  before_action :authenticate_user!, except:"index"
   def index
-    @tags = Tag.all
-  end
-  def test
-    @user = Tag.new
   end
   def search
-    @pagy, @results = pagy_array(Tag.search(params[:search]) + Task.search(params[:search]) + Project.search(params[:search]))
-    @results.each do |i|
-      puts i.title
-    end
+    @pagy, @results = pagy_array(Tag.cur_user(current_user).search(params[:search]) + Task.cur_user(current_user).search(params[:search]) + Project.cur_user(current_user).search(params[:search]),items:15)
   end
 end

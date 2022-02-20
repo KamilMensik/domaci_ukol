@@ -1,11 +1,11 @@
 class TasksController < ApplicationController
 		before_action :authenticate_user!
     def index
-        @pagy, @tasks = pagy(task.all.includes(:tags,:project),items:20)
+        @pagy, @tasks = pagy(task.all.includes(:tags,:project),items:15)
     end
 
     def show
-        @task = task.includes(:project, :tags).find(params[:id])
+        @task = task.find(params[:id])
     end
 
 	def new
@@ -50,7 +50,7 @@ class TasksController < ApplicationController
 
     private
     def task_params
-        params.require(:task).permit(:title,:user_id,:description,:is_done,:search,:project_id,tag_ids: [])
+        params.require(:task).permit(:title,:user_id,:description,:is_done,:search,:project_id,:file,tag_ids: [])
     end
 
     def task

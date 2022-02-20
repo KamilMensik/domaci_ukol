@@ -1,5 +1,10 @@
-h1
-	=@task.title
--@task.tags.each do |tagsd|
-	=tagsd.title
-	br
+div class="card container" style="text-align: center"
+	div class="card-header"
+		h1=@task.title
+	div class="card-body"
+		h5 class="card-title"
+		-@task.tags.each do |tagsd|
+			=tagsd.title+" "
+		p class="card-text" 
+			=@task.description
+		=render "tasks/complete_button",task: @task

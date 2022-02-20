@@ -1,13 +1,13 @@
 div style = "text-align:center" 
-	h1 = "All Tags for user #{current_user.first_name}" 
+	h1 = "#{t(:all_tags)} #{current_user.first_name}" 
 	br
-	=link_to "Create new tag", new_tag_path,class:"btn btn-primary"
+	=link_to t(:create_new), new_tag_path,class:"btn btn-primary"
 div class = "container"
 	br
 	table class="table table-dark table-striped table-bordered"
 		thead
 			tr
-				th Title
+				th=t(:title)
 				th
 				th 
 				th 
@@ -16,6 +16,7 @@ div class = "container"
 			- @tags.each do |tag|
 				tr
 					td=tag.title	
-					td=link_to "closer look", "tags/#{tag.id}"
-					td=link_to "edit", edit_tag_path(tag.id)
-					td=link_to "delete", "tags/#{tag.id}", data: {turbo_method: :delete,turbo_confirm: "Are you sure?"}
+					td=link_to t(:show), "tags/#{tag.id}"
+					td=link_to t(:edit), edit_tag_path(tag.id)
+					td=link_to t(:delete), "tags/#{tag.id}", data: {turbo_method: :delete,turbo_confirm: "Are you sure?"}
+	==pagy_nav(@pagy)

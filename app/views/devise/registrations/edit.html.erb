@@ -1,35 +1,41 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2 style="text-align: center;"><%=t(:edit_user)%></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+  <div class="form-inputs container">
+    <%= f.input :first_name,
+                required: true,
+                autofocus: true,
+                label: t(:first_name)%>
+    <%= f.input :surname,
+                required: true, label: t(:surname)%>
+
+    <%= f.input :email, required: true%>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
     <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
                 required: false,
-                input_html: { autocomplete: "new-password" } %>
+                input_html: { autocomplete: "new-password" }, label: t(:password) %>
     <%= f.input :password_confirmation,
                 required: false,
-                input_html: { autocomplete: "new-password" } %>
+                input_html: { autocomplete: "new-password" }, label: t(:password_confirmation) %>
     <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
                 required: true,
-                input_html: { autocomplete: "current-password" } %>
+                input_html: { autocomplete: "current-password" }, label: t(:current_password) %>
   </div>
+  <br>
 
+  
+<div style="text-align: center;">
   <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+    <%= f.button :submit, t(:update), class:"btn btn-outline-primary btn-lg"%><br>
   </div>
 <% end %>
+  <%= link_to t(:delete_acc), registration_path(resource_name), data: { turbo_method: :delete, confirm: "Are you sure?" }, class: "btn btn-danger" %><br>
+  <%= link_to t(:back), :back %>
+</div>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { turbo_method: :delete, confirm: "Are you sure?" } %></p>
-
-<%= link_to "Back", :back %>

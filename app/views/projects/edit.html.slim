@@ -1,7 +1,1 @@
-=simple_form_for @project do |f|
-	-@project.errors.full_messages_for(:user_id).each do |message|
-		=message
-	=f.input :title
-	=f.input :position
-	=f.input :user_id, as: :hidden, input_html: { value: current_user.id }
-	=f.button :submit
+=render "projects/project_form"

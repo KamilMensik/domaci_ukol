@@ -1,11 +1,11 @@
 class TagsController < ApplicationController
     before_action :authenticate_user!
     def index
-        @tags = Tag.all
+        @pagy,@tags = pagy(cur_tag.all,items:15)
     end
 
     def show
-        @tag = Tag.find(params[:id])
+        @tag = cur_tag.find(params[:id])
     end
 
 	def new
@@ -23,11 +23,11 @@ class TagsController < ApplicationController
     end
 
     def edit
-        @tag = Tag.find(params[:id])
+        @tag = cur_tag.find(params[:id])
     end
 
     def update
-    @tag = Tag.find(params[:id])
+    @tag = cur_tag.find(params[:id])
     if @tag.update(tag_params)
         redirect_to @tag
         else
@@ -36,7 +36,7 @@ class TagsController < ApplicationController
     end
 
     def destroy
-        @tag = Tag.find(params[:id])
+        @tag = cur_tag.find(params[:id])
         @tag.destroy
         redirect_back(fallback_location: root_path)
     end
@@ -44,5 +44,9 @@ class TagsController < ApplicationController
     private
     def tag_params
         params.require(:tag).permit(:title,:user_id)
+    end
+
+    def cur_tag
+        Tag.cur_user(current_user)
     end
 end

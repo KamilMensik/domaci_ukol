@@ -2,6 +2,7 @@ class Task < ApplicationRecord
 	validates :user_id, presence: true
 	validates :title, presence: true, length: {minimum: 1}
 	validates_inclusion_of :is_done, in: [true, false]
+	mount_uploader :file, FileUploader
 
 	belongs_to :user
 	belongs_to :project, optional: true
