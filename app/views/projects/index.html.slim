@@ -19,7 +19,7 @@ div class = "container"
 				tr
 					td=project.position
 					td=project.title	
-					td=link_to t(:show), "projects/#{project.id}"
+					td=link_to t(:show), project
 					td=link_to t(:edit), edit_project_path(project.id)
 					td=link_to t(:delete), "projects/#{project.id}", data: {turbo_method: :delete,turbo_confirm: "Are you sure?"}
 	==pagy_nav(@pagy)

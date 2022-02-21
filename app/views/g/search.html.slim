@@ -17,7 +17,7 @@ div class = "container"
 				tr
 					td=highlight(result.title,params[:search])
 					td=result.class.name
-					td=link_to t(:show), "tasks/#{result.id}"
+					td=link_to t(:show), result
 					td=link_to t(:edit), edit_task_path(result.id)
 					td=link_to t(:delete), "tasks/#{result.id}", data: {turbo_method: :delete,turbo_confirm: "Are you sure?"}
 	==pagy_nav(@pagy)

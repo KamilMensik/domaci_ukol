@@ -8,8 +8,8 @@ div class = "container"
 		=f.input :description,label: t(:description)
 		=f.input :is_done,label: t(:is_done)
 		=f.input_field :file, class:"form-control",label: t(:file)
-		=f.association :tags, as: :check_boxes,item_wrapper_class: 'checkbox_container',label: t(:tags)
-		=f.association :project,label: t(:project)
+		=f.association :tags,collection:Tag.cur_user(current_user), as: :check_boxes,item_wrapper_class: 'checkbox_container',label: t(:tags)
+		=f.association :project,collection:Project.cur_user(current_user),label: t(:project)
 		br
 		div style="text-align:center"
 			=f.submit t(:complete), class:"btn btn-outline-primary"

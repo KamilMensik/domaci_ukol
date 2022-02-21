@@ -30,7 +30,7 @@ div class = "container"
 					td=link_to task.project.title,"#{tasks_path}?project=#{task.project.id}" unless task.project==nil
 					td=render "tasks/complete_button",task: task
 					td=task.file.identifier
-					td=link_to t(:show), "tasks/#{task.id}"
+					td=link_to t(:show), task
 					td=link_to t(:edit), edit_task_path(task.id)
 					td=link_to t(:delete), "tasks/#{task.id}", data: {turbo_method: :delete,turbo_confirm: "Are you sure?"}
 	==pagy_nav(@pagy)

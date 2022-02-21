@@ -16,7 +16,7 @@ div class = "container"
 			- @tags.each do |tag|
 				tr
 					td=tag.title	
-					td=link_to t(:show), "tags/#{tag.id}"
+					td=link_to t(:show), tag
 					td=link_to t(:edit), edit_tag_path(tag.id)
 					td=link_to t(:delete), "tags/#{tag.id}", data: {turbo_method: :delete,turbo_confirm: "Are you sure?"}
 	==pagy_nav(@pagy)
